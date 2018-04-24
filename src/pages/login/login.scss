@@ -1,0 +1,45 @@
+page-login {  
+    .img-logo{
+        max-width: 160px;
+        margin: 50px auto 0 auto;
+        display: block; 
+    }  
+
+    .ion-item{
+        background-color: transparent;
+        border-top: none !important;
+        padding-left: 0;
+    }
+   
+   
+    .ion-item .label{
+        color: #46a997
+    }
+
+    ion-input{
+        color: #fff
+    }
+    
+    [ion-fixed]{
+        height: 100%;
+        width: 100%;
+    }
+
+    .ion-content-relative {
+        position: relative;
+        width: 100%;
+    }
+
+    .ou{
+        text-align: center;
+        color: #fff
+    }
+}
+
+
+.alert-user-not-found{
+    > div{
+        background-color:#e65454!important;
+    }
+ 
+}

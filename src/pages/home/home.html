@@ -1,5 +1,9 @@
 <ion-header>
   <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        
     <ion-title>
       Ionic Blank
     </ion-title>
@@ -11,4 +15,7 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
+  <button (click)="logout()">
+    sair
+  </button>
 </ion-content>
