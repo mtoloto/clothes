@@ -3,8 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpClientModule } from '@angular/common/http'; 
-import { ComponentsModule} from '../components/components.module'
+import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from '../components/components.module'
 
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -16,6 +16,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
 import { RegisterPage } from '../pages/register/register';
+import { Dialogs } from '@ionic-native/dialogs';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { RegisterPage } from '../pages/register/register';
     Facebook,
     StatusBar,
     SplashScreen,
+    Dialogs,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider
   ]

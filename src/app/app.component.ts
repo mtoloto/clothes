@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,6 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../pages/login/login';
+import { AuthProvider } from '../providers/auth/auth';
+import { Dialogs, DialogsPromptCallback } from '@ionic-native/dialogs';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,6 +21,9 @@ export class Clothes {
   constructor(private platform: Platform,
     statusBar: StatusBar,
     storage: Storage,
+    private loadingCtrl: LoadingController,
+    private auth: AuthProvider,
+    private dialogs: Dialogs,
     private splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -54,11 +60,24 @@ export class Clothes {
     });
   }
 
-  isActive(page: string) {  
+  isActive(page: string) {
     if (this.nav.getActive() && this.nav.getActive().name === page) {
       return 'default';
     }
     return;
+  }
+
+  logout() {
+    this.dialogs.confirm('Tem certeza que deseja sair?', "Clothes", ["Sim", "Não"])
+      .then((res) => console.log(res))
+      .catch(e => console.log('Error displaying dialog', e));
+    /*  let loading = this.loadingCtrl.create({
+       content: 'Saindo...'
+     });
+     loading.present();
+     this.auth.logout();
+     this.nav.setRoot(LoginPage);
+     loading.dismiss(); */
   }
 }
 
