@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -8,8 +8,8 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  constructor(public navCtrl: NavController, private auth: AuthProvider) { }
- 
+  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private menu: MenuController, private auth: AuthProvider) { }
+
   ionViewCanEnter() {
     return new Promise((resolve, reject) => {
       this.auth.isLoggedIn().then((res: boolean) => {
@@ -25,8 +25,22 @@ export class HomePage {
     });
   }
 
+  ionViewDidEnter() {
+    // the root left menu should be disabled on the tutorial page
+    setTimeout(() => {
+      this.menu.enable(true, "menu");
+    }, 0);
+
+  }
+
   logout() {
+    let loading = this.loadingCtrl.create({
+      content: 'Saindo...'
+    });
+    loading.present();
     this.auth.logout();
     this.navCtrl.setRoot(LoginPage);
+    loading.dismiss();
   }
+
 }

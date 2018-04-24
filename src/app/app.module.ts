@@ -3,7 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; 
+import { ComponentsModule} from '../components/components.module'
 
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -13,8 +14,9 @@ import { Clothes } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { LoginPage } from '../pages/login/login';
-import { AuthProvider } from '../providers/auth/auth'; 
+import { AuthProvider } from '../providers/auth/auth';
 import { RegisterPage } from '../pages/register/register';
+
 
 @NgModule({
   declarations: [
@@ -27,9 +29,10 @@ import { RegisterPage } from '../pages/register/register';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ComponentsModule,
     IonicModule.forRoot(Clothes, {}, {
-      links: [ 
-        { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
+      links: [
+        { component: TutorialPage, name: 'TutorialPage', segment: 'tutorial' },
         { component: HomePage, name: 'HomePage', segment: 'home' }
       ]
     }),
@@ -47,8 +50,8 @@ import { RegisterPage } from '../pages/register/register';
     Facebook,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

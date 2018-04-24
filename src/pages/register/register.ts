@@ -7,6 +7,7 @@ import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the RegisterPage page.
@@ -60,8 +61,7 @@ export class RegisterPage implements OnInit {
     for (const field in this.loginFormErrors) {
       if (!this.loginFormErrors.hasOwnProperty(field)) {
         continue;
-      }
-
+      } 
       // Clear previous errors
       this.loginFormErrors[field] = {};
 
@@ -75,10 +75,7 @@ export class RegisterPage implements OnInit {
 
     console.log(this.loginFormErrors);
   }
-
-  ionViewDidLoad() {
-  }
-
+  
   formIsValid(): boolean {
     return this.registerForm.status == "VALID";
   }
@@ -91,6 +88,10 @@ export class RegisterPage implements OnInit {
     this.auth.register(this.registerForm.value).then(
       (res: any) => {
         if (res.Sucesso) {
+
+          this.auth.setUser(res.Objetos[0]); 
+          this.navCtrl.setRoot(HomePage);
+
         }
         else {
           let toast = this.toastCtrl.create({

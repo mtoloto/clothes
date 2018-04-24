@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,6 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class Clothes {
   rootPage: any = HomePage;
+  @ViewChild(Nav) nav: Nav;
 
   constructor(private platform: Platform,
     statusBar: StatusBar,
@@ -22,7 +23,7 @@ export class Clothes {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.2
       statusBar.styleDefault();
-    
+
 
       // Check if the user has already seen the tutorial
       storage.get('hasSeenTutorial')
@@ -32,7 +33,7 @@ export class Clothes {
             splashScreen.hide();
           } else {
             this.rootPage = TutorialPage;
-            splashScreen.hide();
+            //splashScreen.hide();
           }
           this.platformReady()
         });
@@ -46,5 +47,18 @@ export class Clothes {
     });
   }
 
+  openPage(page: string) {
+    // Set the root of the nav with params if it's a tab index
+    this.nav.setRoot(page).catch((err: any) => {
+      console.log(`Didn't set nav root: ${err}`);
+    });
+  }
+
+  isActive(page: string) {  
+    if (this.nav.getActive() && this.nav.getActive().name === page) {
+      return 'default';
+    }
+    return;
+  }
 }
 

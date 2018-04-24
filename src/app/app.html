@@ -1,33 +1,24 @@
 <ion-split-pane>
-
     <!-- logged out menu -->
-    <ion-menu id="menu" side="left" [content]="content" >
-
+    <ion-menu id="menu" side="left" [content]="content">
         <ion-header>
-            <ion-toolbar>
-                <ion-title>Menu</ion-title>
+            <ion-toolbar class="border-none">
+                <ion-title></ion-title>
             </ion-toolbar>
         </ion-header>
-
-        <ion-content class="outer-content">
-
-            <ion-list>
-                <ion-list-header>
-                    Navigate
-                </ion-list-header>
-                <button ion-item menuClose>
-                    <ion-icon item-start [name]="home"></ion-icon>
-                    Home
-                </button>
+        <ion-content class="outer-content background-verde-clothes">
+            <ion-list no-lines>
+                <ion-item class="menu-clothes-item" (click)="openPage('HomePage')" menuClose detail-none>
+                    <ion-icon ios="ios-home" md="md-home" [color]="isActive('HomePage')"></ion-icon> Home</ion-item> 
+                <ion-item class="menu-clothes-item" (click)="openPage('HomePage')" menuClose detail-none>
+                    <ion-icon ios="ios-home" md="md-home"></ion-icon> Pedidos</ion-item>
+                <ion-item class="menu-clothes-item" (click)="openPage('TutorialPage')" menuClose detail-none>
+                    <ion-icon ios="ios-home" md="md-home"></ion-icon> Meus dados</ion-item>
+                <ion-item class="menu-clothes-item" (click)="openPage('TutorialPage')" menuClose detail-none>
+                    <ion-icon ios="ios-home" md="md-home"></ion-icon> Logout</ion-item>
             </ion-list>
-
         </ion-content>
-
     </ion-menu>
-
-
-
     <!-- main navigation -->
-    <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>
-
+    <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main class="background-clothes"></ion-nav>
 </ion-split-pane>

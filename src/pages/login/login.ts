@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { UserOptions } from '../../interfaces/user-options';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -30,6 +30,7 @@ export class LoginPage {
     private fb: Facebook, 
     formBuilder: FormBuilder,
     private auth: AuthProvider,
+    public menu: MenuController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
 
@@ -47,9 +48,11 @@ export class LoginPage {
   }
 
   doLogin() {
+    
     let loading = this.loadingCtrl.create({
       content: 'Logando...'
     });
+
     loading.present();
     this.auth.login(this.loginForm.value).then(
       (res: any) => {
@@ -86,6 +89,14 @@ export class LoginPage {
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
       .catch(e => console.log(e));
+  }
+
+  ionViewDidEnter() {
+    // the root left menu should be disabled on the tutorial page
+    setTimeout(() => {
+      this.menu.enable(false, "menu");
+    }, 0);
+
   }
 
 }

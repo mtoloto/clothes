@@ -45,7 +45,7 @@ export class AuthProvider {
     });
   }
 
-  logout() {
+  logout() { 
     var sto = this.storage;
     sto.remove('user');
   }
