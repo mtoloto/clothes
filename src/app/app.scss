@@ -15,13 +15,15 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+ 
+
 .background-clothes{
-    background: url('/assets/imgs/background-clothes.jpg') no-repeat center ;
+    background: url('../assets/imgs/background-clothes.jpg') no-repeat center ;
     background-size: cover;
 }
 
 .content-ios{
-    background: url('/assets/imgs/background-clothes.jpg') no-repeat center ;
+    background: url('../assets/imgs/background-clothes.jpg') no-repeat center ;
     background-size: cover;
 }
 
@@ -56,4 +58,11 @@
     background: transparent;
     color: #fff;
  }
+ 
+ .no-shadow-header::after{
+     content: none !important
+ }
 
+.bar-buttons{
+    color: #46a997;
+}
