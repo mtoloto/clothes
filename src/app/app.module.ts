@@ -17,6 +17,8 @@ import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
 import { RegisterPage } from '../pages/register/register';
 import { Dialogs } from '@ionic-native/dialogs';
+import { AvisoPage } from '../pages/aviso/aviso';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { Dialogs } from '@ionic-native/dialogs';
     HomePage,
     TutorialPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AvisoPage,
+    PerfilPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { Dialogs } from '@ionic-native/dialogs';
     IonicModule.forRoot(Clothes, {}, {
       links: [
         { component: TutorialPage, name: 'TutorialPage', segment: 'tutorial' },
-        { component: HomePage, name: 'HomePage', segment: 'home' }
+        { component: HomePage, name: 'HomePage', segment: 'home' },
+        { component: PerfilPage, name: 'PerfilPage', segment: 'perfil' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -45,7 +50,9 @@ import { Dialogs } from '@ionic-native/dialogs';
     HomePage,
     TutorialPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AvisoPage,
+    PerfilPage
   ],
   providers: [
     Facebook,

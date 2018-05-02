@@ -11,21 +11,18 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.178:816/';
+let apiUrl = 'http://192.168.0.178:817/api/';
 
 @Injectable()
 export class AuthProvider {
-
-  constructor(private http: HttpClient, private storage: Storage) {
-    console.log('Hello AuthServiceProvider Provider');
-  }
+ 
+  constructor(private http: HttpClient, private storage: Storage) { }
 
   login(credentials) {
     return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders();
-      headers.set('Content-Type', 'application/json');
-
-      this.http.post(apiUrl + 'ServicosCliente/Login', credentials)
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
+      console.log(credentials);
+      this.http.post(apiUrl + "login", credentials, { headers: headers })
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -45,24 +42,23 @@ export class AuthProvider {
     });
   }
 
-  logout() { 
+  logout() {
     var sto = this.storage;
     sto.remove('user');
   }
 
-  setUser(user) {
-    console.log(user);
+  setUser(user) { 
     this.storage.set("user", user);
   }
-
-  isLoggedIn() { 
+ 
+  isLoggedIn() {
     return new Promise((resolve, reject) => {
       var sto = this.storage;
       sto.get('user').then((val) => {
         if (val != null) {
           resolve(true);
         }
-        else{
+        else {
           resolve(false);
         }
       }).catch((err) => {

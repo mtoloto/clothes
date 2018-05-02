@@ -59,8 +59,6 @@
       },
       "cordova-plugin-dialogs": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

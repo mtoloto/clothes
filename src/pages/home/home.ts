@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AvisoPage } from '../aviso/aviso';
 
 @Component({
   selector: 'page-home',
@@ -42,5 +43,10 @@ export class HomePage {
     this.navCtrl.setRoot(LoginPage);
     loading.dismiss();
   }
+
+  goToAviso() {
+    this.navCtrl.push(AvisoPage);
+  }
+
 
 }

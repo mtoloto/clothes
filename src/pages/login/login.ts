@@ -5,9 +5,9 @@ import { UserOptions } from '../../interfaces/user-options';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoadingController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular'; 
+import { ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { RegisterPage } from '../register/register';
+import { RegisterPage } from '../register/register'; 
 
 /**
  * Generated class for the LoginPage page.
@@ -27,16 +27,16 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private fb: Facebook, 
+    private fb: Facebook,
     formBuilder: FormBuilder,
     private auth: AuthProvider,
     public menu: MenuController,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController ) {
 
     this.loginForm = formBuilder.group({
       Username: ['', [Validators.required]],
-      Senha: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      Password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 
@@ -48,7 +48,7 @@ export class LoginPage {
   }
 
   doLogin() {
-    
+
     let loading = this.loadingCtrl.create({
       content: 'Logando...'
     });
@@ -56,13 +56,13 @@ export class LoginPage {
     loading.present();
     this.auth.login(this.loginForm.value).then(
       (res: any) => {
-        if (res.Sucesso) {
-          this.auth.setUser(res.Objetos[0]); 
+        if (res.authenticated) {
+          this.auth.setUser(res.Objetos[0]);
           this.navCtrl.setRoot(HomePage)
         }
         else {
           let toast = this.toastCtrl.create({
-            message: res.Mensagem,
+            message: res.message,
             duration: 3000,
             cssClass: 'alert-user-not-found',
             position: 'top'
@@ -74,18 +74,27 @@ export class LoginPage {
         console.log(res);
       },
       (err) => {
+        let toast = this.toastCtrl.create({
+          message: "Não foi possível fazer login.",
+          duration: 3000,
+          cssClass: 'alert-user-not-found',
+          position: 'top'
+        });
+        toast.present();
         console.log(err);
+        loading.dismiss();
       }).catch(
         (res) => {
           console.log(res);
           loading.dismiss();
         });
   }
+  
   goToRegister() {
     this.navCtrl.push(RegisterPage);
   }
-  
-  fbLogin() {
+
+  fbLogin() { 
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
       .catch(e => console.log(e));
@@ -95,8 +104,6 @@ export class LoginPage {
     // the root left menu should be disabled on the tutorial page
     setTimeout(() => {
       this.menu.enable(false, "menu");
-    }, 0);
-
-  }
-
+    }, 0); 
+  } 
 }

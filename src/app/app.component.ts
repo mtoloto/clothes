@@ -9,7 +9,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
-import { Dialogs, DialogsPromptCallback } from '@ionic-native/dialogs';
+import { Dialogs } from '@ionic-native/dialogs';
 
 @Component({
   templateUrl: 'app.html'
@@ -69,7 +69,17 @@ export class Clothes {
 
   logout() {
     this.dialogs.confirm('Tem certeza que deseja sair?', "Clothes", ["Sim", "Não"])
-      .then((res) => console.log(res))
+      .then((res: any) => {
+        if (res == 1) {
+          let loading = this.loadingCtrl.create({
+            content: 'Saindo...'
+          });
+          loading.present();
+          this.auth.logout();
+          this.nav.setRoot(LoginPage);
+          loading.dismiss();
+        }
+      })
       .catch(e => console.log('Error displaying dialog', e));
     /*  let loading = this.loadingCtrl.create({
        content: 'Saindo...'
