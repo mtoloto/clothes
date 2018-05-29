@@ -1,0 +1,41 @@
+<!--
+  Generated template for the PhoneloginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+  <div class="background-clothes div-background">
+    <div style="text-align: center">
+      <img class="img-logo" src="./assets/imgs/logo-clothes.svg" />
+    </div>
+    <div class="inner-background {{classAux}}">
+      <h5 padding ion-text>Insira o número do seu celular</h5>
+      <ion-list no-lines>
+        <ion-item>
+          <ion-icon name="call" item-start></ion-icon>
+          <ion-input [(ngModel)]="phone" type="text" (focus)="addHeight()" name="phone" placeholder="(11) 91234-1234" [brmasker]="{phone: true}"></ion-input>
+        </ion-item>
+      </ion-list> 
+      <ion-list no-lines> 
+        <ion-item *ngIf="!fieldCelphoneFocus">
+          <button ion-item (click)="fbLogin()" class="button-facebook">
+            Conectar com Facebook
+          </button>
+        </ion-item> 
+        <ion-item *ngIf="fieldCelphoneFocus">
+          <ion-row>
+            <ion-col col-6>
+              <button ion-button clear class="button-facebook" (click)="removeHeight()">
+                Cancelar
+              </button>
+            </ion-col>
+            <ion-col col-6>
+              <button ion-button *ngIf="fieldCelphoneFocus" (click)="postPhone()" full>Confirmar</button>
+            </ion-col>
+          </ion-row> 
+        </ion-item> 
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

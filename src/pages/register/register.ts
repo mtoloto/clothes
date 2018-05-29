@@ -89,7 +89,7 @@ export class RegisterPage implements OnInit {
       (res: any) => {
         if (res.Sucesso) {
 
-          this.auth.setUser(res.Objetos[0]); 
+         // this.auth.setUser(res.Objetos[0]); 
           this.navCtrl.setRoot(HomePage);
 
         }

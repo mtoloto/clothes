@@ -12,18 +12,15 @@ export class HomePage {
   constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private menu: MenuController, private auth: AuthProvider) { }
 
   ionViewCanEnter() {
-    return new Promise((resolve, reject) => {
-      this.auth.isLoggedIn().then((res: boolean) => {
-        if (!res) {
-          setTimeout(() => {
-            this.navCtrl.setRoot(LoginPage);
-          }, 0);
-        }
-        resolve(res);
-      }, (err) => {
-        reject(err);
-      });
-    });
+    if (!this.auth.isLoggedInNew()) {
+      setTimeout(() => {
+        this.navCtrl.setRoot(LoginPage);
+      }, 0);
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   ionViewDidEnter() {

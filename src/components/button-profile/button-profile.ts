@@ -12,13 +12,9 @@ import { PanelRightProfileComponent } from '../panel-right-profile/panel-right-p
   selector: 'button-profile',
   templateUrl: 'button-profile.html'
 })
-export class ButtonProfileComponent {
+export class ButtonProfileComponent { 
 
-  text: string;
-
-  constructor(private popoverCtrl: PopoverController) {
-    console.log('Hello ButtonProfileComponent Component');
-    this.text = 'Hello World';
+  constructor(private popoverCtrl: PopoverController) {  
   }
 
   presentRadioPopover(ev: UIEvent) {

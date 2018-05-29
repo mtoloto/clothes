@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core'; 
 import { MenuController, NavController, Slides } from 'ionic-angular'; 
-import { Storage } from '@ionic/storage'; 
-import { LoginPage } from '../login/login';
+import { Storage } from '@ionic/storage';  
+import { PhoneLoginPage } from '../phonelogin/phonelogin';
 
 @Component({
   selector: 'page-tutorial',
@@ -17,12 +17,10 @@ export class TutorialPage {
     public navCtrl: NavController,
     public menu: MenuController,
     public storage: Storage
-  ) {
-
-  }
+  ) { }
 
   startApp() {
-    this.navCtrl.push(LoginPage).then(() => {
+    this.navCtrl.push(PhoneLoginPage).then(() => {
       this.storage.set('hasSeenTutorial', 'true');
     })
   }

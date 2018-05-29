@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
 import { Dialogs } from '@ionic-native/dialogs';
+import { PhoneLoginPage } from '../pages/phonelogin/phonelogin';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,12 +31,11 @@ export class Clothes {
       // Here you can do any higher level native things you might need.2
       statusBar.styleDefault();
 
-
       // Check if the user has already seen the tutorial
       storage.get('hasSeenTutorial')
         .then((hasSeenTutorial) => {
           if (hasSeenTutorial) {
-            this.rootPage = HomePage;
+            this.rootPage = PhoneLoginPage;
             splashScreen.hide();
           } else {
             this.rootPage = TutorialPage;

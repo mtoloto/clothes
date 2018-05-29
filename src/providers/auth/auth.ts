@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
 import 'rxjs/add/operator/map';
+import { BaseProvider } from '../base/base';
 
 /*
   Generated class for the AuthServiceProvider provider.
@@ -11,19 +12,25 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.178:817/api/';
+
 
 @Injectable()
-export class AuthProvider {
- 
-  constructor(private http: HttpClient, private storage: Storage) { }
+export class AuthProvider extends BaseProvider {
+
+  private loggedIn = false;
+
+  constructor(private http: HttpClient, private storage: Storage) {
+    super();
+    this.loggedIn = !!localStorage.getItem('auth_token');
+  }
 
   login(credentials) {
     return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
-      console.log(credentials);
-      this.http.post(apiUrl + "login", credentials, { headers: headers })
-        .subscribe(res => {
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      this.http.post(this.apiUrl + "/app/auth/login", credentials, { headers: headers })
+        .subscribe((res: any) => {
+          localStorage.setItem('auth_token', res.auth_token);
+          this.loggedIn = true;
           resolve(res);
         }, (err) => {
           reject(err);
@@ -33,7 +40,8 @@ export class AuthProvider {
 
   register(data) {
     return new Promise((resolve, reject) => {
-      this.http.post(apiUrl + 'ServicosCliente/CadastroPrimario', data)
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      this.http.post(this.apiUrl + '/customers/register', data, { headers: headers })
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -43,14 +51,10 @@ export class AuthProvider {
   }
 
   logout() {
-    var sto = this.storage;
-    sto.remove('user');
+    localStorage.removeItem('auth_token');
+    this.loggedIn = false;
   }
 
-  setUser(user) { 
-    this.storage.set("user", user);
-  }
- 
   isLoggedIn() {
     return new Promise((resolve, reject) => {
       var sto = this.storage;
@@ -78,4 +82,27 @@ export class AuthProvider {
       });
     });
   }
+
+  isLoggedInNew() {
+    return this.loggedIn;
+  }
+
+  facebookLogin(accessToken: string) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    console.log(accessToken); 
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/externalauth/facebook', {  accessToken : accessToken }, { headers: headers })
+        .subscribe(
+          (res: any) => {
+            localStorage.setItem('auth_token', res.auth_token);
+            this.loggedIn = true;
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          });
+    });
+  }
+
 }

@@ -19,7 +19,15 @@ import { RegisterPage } from '../pages/register/register';
 import { Dialogs } from '@ionic-native/dialogs';
 import { AvisoPage } from '../pages/aviso/aviso';
 import { PerfilPage } from '../pages/perfil/perfil';
-
+import { UserService } from '../services/user.service';
+import { HttpModule } from '@angular/http';
+import { ConfigService } from '../utils/config.service';
+import { PhoneLoginPage } from '../pages/phonelogin/phonelogin';
+import { BrMaskerModule } from 'brmasker-ionic-3';
+import { PhoneLoginProvider } from '../providers/phonelogin/phonelogin';
+import { BaseProvider } from '../providers/base/base';
+import { PhoneConfirmationPage } from '../pages/phone-confirmation/phone-confirmation';
+import { PhoneRegisterPage } from '../pages/phone-register/phone-register';
 
 @NgModule({
   declarations: [
@@ -29,20 +37,27 @@ import { PerfilPage } from '../pages/perfil/perfil';
     LoginPage,
     RegisterPage,
     AvisoPage,
-    PerfilPage
+    PerfilPage,
+    PhoneLoginPage,
+    PhoneConfirmationPage,
+    PhoneRegisterPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     ComponentsModule,
     IonicModule.forRoot(Clothes, {}, {
       links: [
+        { component: PhoneLoginPage, name: 'PhoneLoginPage', segment: 'phonelogin' },
         { component: TutorialPage, name: 'TutorialPage', segment: 'tutorial' },
         { component: HomePage, name: 'HomePage', segment: 'home' },
-        { component: PerfilPage, name: 'PerfilPage', segment: 'perfil' }
+        { component: PerfilPage, name: 'PerfilPage', segment: 'perfil' }, 
+        { component: PhoneConfirmationPage, name: 'PhoneConfirmationPage', segment: 'phoneConfirmation' }
       ]
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,15 +67,22 @@ import { PerfilPage } from '../pages/perfil/perfil';
     LoginPage,
     RegisterPage,
     AvisoPage,
-    PerfilPage
+    PerfilPage,
+    PhoneLoginPage,
+    PhoneConfirmationPage,
+    PhoneRegisterPage
   ],
   providers: [
     Facebook,
     StatusBar,
     SplashScreen,
+    UserService,
     Dialogs,
+    ConfigService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthProvider
+    AuthProvider,
+    PhoneLoginProvider,
+    BaseProvider
   ]
 })
 export class AppModule { }

@@ -1,0 +1,15 @@
+page-phone-confirmation {
+.verification-code-wrap{
+        ion-input{
+            border: 1px solid #c1c1c1; 
+        }
+
+        .text-input{ 
+            text-align: center !important; 
+        }
+
+        .erro-code{
+            border-color: #e2aeae
+        }
+    }
+}

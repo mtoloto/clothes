@@ -1,0 +1,40 @@
+page-phonelogin { 
+
+    .background-clothes{
+        background-image: url('../assets/imgs/background-clothes.jpg')
+    } 
+    .div-background{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        
+        .img-logo{
+            max-width: 150px;
+           margin-top: 180px;
+            
+        }
+    }
+
+    .inner-background{
+        position:fixed;
+        width: 100%;
+        height: 35%;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 0 0 rgba(0,0,0,0.4);
+        transition: all 0.5s
+    }
+
+    .button-facebook{
+        font-size: 12px;
+        color: #445e9c;
+        transition: all 0.5s
+    }
+
+    .height-100{
+        height: 100% !important;
+    }
+}
